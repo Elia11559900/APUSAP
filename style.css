@@ -72,7 +72,7 @@ button[type="submit"]:hover {
 /* Styles pour le message de confirmation */
 #confirmationMessage {
    /* display: none; */ /* Caché par défaut en JS */
-   color: green;
+   color: green; /* Couleur verte pour le message de succès */
    margin-top: 10px;
    padding: 10px;
    background-color: #e9ffe9; /* Fond léger pour le message */

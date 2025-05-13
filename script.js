@@ -9,14 +9,21 @@ document.getElementById("messeForm").addEventListener("submit", function(event) 
     const demandeText = document.getElementById("demande").value;
 
     let dateString = '';
+    // Récupère les valeurs des champs de date, qu'ils soient visibles ou non
+    const dateUnique = document.getElementById("dateUnique").value;
+    const dateDebut = document.getElementById("dateDebut").value;
+    const dateFin = document.getElementById("dateFin").value;
+
+
     if (jours === 1) {
-        const dateUnique = document.getElementById("dateUnique").value;
         dateString = `Date de la Messe: ${dateUnique}`;
     } else if (jours > 1) {
-        const dateDebut = document.getElementById("dateDebut").value;
-        const dateFin = document.getElementById("dateFin").value;
         dateString = `Date de Début: ${dateDebut}\nDate de Fin: ${dateFin}`;
+    } else {
+         // Cas où jours est 0 ou non valide, pas de date spécifique
+         dateString = "Date(s) non spécifiée(s) / Nombre de jours non valide";
     }
+
 
     // Construire le message complet
     const message =
@@ -28,39 +35,36 @@ document.getElementById("messeForm").addEventListener("submit", function(event) 
         `Numéro de Téléphone: ${telephone}\n\n` +
         `Demande:\n${demandeText}`;
 
-    // Encoder le message pour les URLs
+    // Encoder le message pour l'URL WhatsApp
     const encodedMessage = encodeURIComponent(message);
 
-    // Numéros et email pour l'envoi
-    const whatsappNumber = "22991755979"; // Numéro WhatsApp fourni
-    const emailAddress = "technologiegklm@gmail.com"; // Adresse Email fournie
-    const emailSubject = encodeURIComponent("Demande de Messe depuis le site web");
+    // Numéro WhatsApp pour l'envoi (Utilisé celui du dernier script fourni)
+    const whatsappNumber = "22991755979";
 
-    // Ouvrir WhatsApp
+    // Construire l'URL WhatsApp
     // Utilisation de wa.me qui est plus fiable sur différentes plateformes
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank'); // Ouvre dans un nouvel onglet/fenêtre
 
-    // Ouvrir l'application email
-    const emailUrl = `mailto:${emailAddress}?subject=${emailSubject}&body=${encodedMessage}`;
-    window.open(emailUrl, '_blank'); // Ouvre dans un nouvel onglet/fenêtre
+    // Rediriger ou ouvrir WhatsApp dans un nouvel onglet/fenêtre
+    // Ouvrir dans un nouvel onglet (_blank) est généralement préférable pour ne pas quitter la page du formulaire
+    window.open(whatsappUrl, '_blank');
 
-    // Afficher le message de confirmation (après avoir ouvert les liens)
+    // Afficher le message de confirmation
     document.getElementById("confirmationMessage").style.display = "block";
 
     // Réinitialiser le formulaire
     this.reset();
     // Réinitialiser les champs de date spécifiquement (pour clear leurs valeurs)
     resetDateFields();
-    // Appeler gererAffichageDates après reset pour masquer/afficher correctement si le nombre de jours par défaut changeait
-    // ou si la valeur par défaut est 1 et les champs doivent s'afficher après reset.
+    // Appeler gererAffichageDates après reset pour masquer/afficher correctement selon la valeur par défaut
     gererAffichageDates();
 });
 
 // Fonction pour gérer l'affichage des champs de date
 function gererAffichageDates() {
     const joursInput = document.getElementById("jours");
-    const jours = parseInt(joursInput.value); // Assurez-vous que c'est un nombre
+    // Utilisez || 0 pour traiter les valeurs vides ou non numériques comme 0
+    const jours = parseInt(joursInput.value) || 0;
     const dateUniqueContainer = document.getElementById("dateUniqueContainer");
     const datesMultiplesContainer = document.getElementById("datesMultiplesContainer");
     const dateUniqueField = document.getElementById("dateUnique");
@@ -88,7 +92,7 @@ function gererAffichageDates() {
          // Clear value of hidden field
         dateUniqueField.value = '';
 
-    } else { // Gère le cas où la valeur n'est pas un nombre valide ou est vide (après reset par exemple)
+    } else { // Gère le cas où la valeur n'est pas un nombre valide, est 0 ou est vide
         dateUniqueContainer.style.display = "none";
         datesMultiplesContainer.style.display = "none";
         dateUniqueField.required = false;
@@ -108,8 +112,6 @@ function resetDateFields() {
     document.getElementById("dateUnique").value = "";
     document.getElementById("dateDebut").value = "";
     document.getElementById("dateFin").value = "";
-    // Note: La fonction gererAffichageDates() appelée après reset s'occupe déjà de clear les champs cachés,
-    // mais garder cette fonction ne fait pas de mal et peut être utile si resetDateFields était appelée seule.
 }
 
 
@@ -118,8 +120,9 @@ function resetDateFields() {
 document.addEventListener("DOMContentLoaded", function() {
      // Ajoute une valeur par défaut si le champ jours est vide au chargement
     const joursInput = document.getElementById("jours");
-    if (!joursInput.value) {
-        joursInput.value = "1";
+    // Vérifie si la valeur est vide ou non un nombre valide au chargement
+    if (!joursInput.value || isNaN(parseInt(joursInput.value))) {
+        joursInput.value = "1"; // Définit la valeur par défaut à 1 si elle est vide ou invalide
     }
     gererAffichageDates(); // Appel initial au chargement
 
