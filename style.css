@@ -1,0 +1,104 @@
+/* Styles Généraux */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333; /* Garde le texte du corps en gris foncé pour le contraste sur le fond blanc */
+}
+
+.container {
+    width: 90%;  /* Un peu plus étroit sur mobile */
+    margin: auto;
+    overflow: hidden;
+    max-width: 800px; /* Optionnel: limite la largeur max sur très grands écrans */
+}
+
+/* Styles des Blocs */
+.info-block, .form-block, .contact-block {
+    background-color: #fff; /* Le bloc formulaire reste blanc */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Application de la couleur bleu ciel pur et blanc aux blocs info et contact */
+.info-block, .contact-block {
+    background-color: #26c7de; /* Bleu ciel pur */
+    color: white; /* Texte blanc */
+}
+
+/* Styles du Formulaire */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Garde les labels du formulaire en gris foncé pour le contraste sur le fond blanc */
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Application de la couleur bleu ciel pur et blanc au bouton */
+button[type="submit"] {
+    background-color: #26c7de; /* Bleu ciel pur */
+    color: white; /* Texte blanc */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    font-size: 1.1em; /* Rendre le texte du bouton légèrement plus grand */
+}
+
+/* Hover effect: slightly darker blue */
+button[type="submit"]:hover {
+    background-color: #1a9bb2; /* Un bleu légèrement plus foncé au survol */
+}
+
+/* Styles pour le message de confirmation */
+#confirmationMessage {
+   /* display: none; */ /* Caché par défaut en JS */
+   color: green;
+   margin-top: 10px;
+   padding: 10px;
+   background-color: #e9ffe9; /* Fond léger pour le message */
+   border: 1px solid #b3ffb3;
+   border-radius: 4px;
+   text-align: center;
+}
+
+/* Masquer les conteneurs de dates par défaut (controlé par JS)*/
+#dateUniqueContainer, #datesMultiplesContainer {
+    /* display: none; */ /* Contrôlé par JS */
+    margin-bottom: 10px;
+}
+
+/* Media Queries (Adaptation aux petits écrans) */
+@media (max-width: 768px) {
+
+    .container {
+        width: 95%; /* Encore plus étroit sur très petits écrans */
+    }
+
+    .info-block, .form-block, .contact-block {
+        padding: 15px; /* Moins de padding */
+    }
+
+     label {
+        margin-top: 10px; /* Plus d'espace au-dessus des labels */
+    }
+}

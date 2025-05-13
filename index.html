@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Messe - Paroisse Universitaire Saint Augustin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Premier Bloc: Informations -->
+        <div class="info-block">
+            <h2>Informations</h2>
+            <p>Les Demandes de Messe ordinaire se font à 2.000 FCFA par Messe.</p>
+            <p>Soyez bref et précis dans la formulation de vos demandes de messe.</p>
+            <p>Les demandes de messe doivent être formulées et envoyées au plus tard à 19h du jour précédent si la Célébration Eucharistique est pour le lendemain.</p>
+        </div>
+
+        <!-- Second Bloc: Formulaire -->
+        <div class="form-block">
+            <h2>Formulaire de Demande</h2>
+            <form id="messeForm">
+                <label for="nom">Nom et Prénom(s) :</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="jours">Nombre de Jours :</label>
+                <input type="number" id="jours" name="jours" min="1" value="1" required> <!-- Added default value 1 -->
+
+                <label for="heure">Heure de la Messe :</label>
+                <input type="time" id="heure" name="heure" required>
+
+                <!-- Champs de date - Initialement cachés (controlled by JS) -->
+                <div id="dateUniqueContainer" style="display: none;">
+                    <label for="dateUnique">Date de la Messe :</label>
+                    <input type="date" id="dateUnique" name="dateUnique">
+                </div>
+
+                <div id="datesMultiplesContainer" style="display: none;">
+                    <label for="dateDebut">Date de Début :</label>
+                    <input type="date" id="dateDebut" name="dateDebut">
+
+                    <label for="dateFin">Date de Fin :</label>
+                    <input type="date" id="dateFin" name="dateFin">
+                </div>
+
+                <label for="telephone">Numéro de Téléphone :</label>
+                <input type="tel" id="telephone" name="telephone" required>
+
+                <label for="demande">Saisissez votre Demande de Messe :</label>
+                <textarea id="demande" name="demande" rows="4" required></textarea>
+
+                <button type="submit">Envoyer votre Demande</button>
+            </form>
+            <!-- Message updated slightly to reflect interaction needed -->
+            <div id="confirmationMessage" style="display:none; color:green;">
+                Votre demande a été traitée. Veuillez confirmer l'envoi dans WhatsApp et Email.
+             </div>
+        </div>
+
+        <!-- Troisième Bloc: Coordonnées -->
+        <div class="contact-block">
+            <h2>Autre Informations</h2>
+            <p>Parakou, Bénin</p>
+            <p>Arafat, Derrière le marché TCHAKITIBAM</p>
+            <p>Pour toutes informations ou renseignement complémentaire, prière contacter le :</p>
+                <p>Celtis : +229 014 326 3643</p>
+                <p>MTN : +229 015 704 9040</p>
+            
+            <p>Congrégations des Oblats de Saint François de Sales (OSFS)</p>
+            <p>Aumônier et Curé : +229 014 033 8888</p>
+            <p>© 2024 Aumônerie et Paroisse Universitaire Saint Augustin de Parakou. Tous droits réservés.</p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
